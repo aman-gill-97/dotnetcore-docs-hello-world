@@ -1,22 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using dotnetcoresample.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Runtime.InteropServices;
+using Microsoft.EntityFrameworkCore;
 
-namespace dotnetcoresample.Pages;
-
-public class IndexModel : PageModel
+namespace dotnetcoresample.Pages.Employees
 {
-
-    public string OSVersion { get { return RuntimeInformation.OSDescription; }  }
-    
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public class IndexModel : PageModel
     {
-        _logger = logger;
-    }
+        private readonly dotnetcoresample.Models.ContosoHRContext _context;
 
-    public void OnGet()
-    {        
+        public IndexModel(dotnetcoresample.Models.ContosoHRContext context)
+        {
+            _context = context;
+        }
+
+        public IList<Employee> Employee { get; set; }
+
+        public async Task OnGetAsync()
+        {
+            Employee = await _context.Employees.ToListAsync();
+        }
     }
 }

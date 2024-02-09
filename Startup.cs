@@ -88,8 +88,7 @@ namespace dotnetcoresample
             SqlConnection.RegisterColumnEncryptionKeyStoreProviders(
                 customProviders: new Dictionary<string, SqlColumnEncryptionKeyStoreProvider>(capacity: 1, comparer: StringComparer.OrdinalIgnoreCase)
                 {
-
-                    { 
+                    {
                         SqlColumnEncryptionAzureKeyVaultProvider.ProviderName, sqlColumnEncryptionAzureKeyVaultProvider
                     }
                 }
